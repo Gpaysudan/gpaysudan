@@ -1,0 +1,328 @@
+/* --- 1. الإعدادات العامة والمتغيرات --- */
+:root {
+    --primary: #10b981;
+    --primary-dark: #059669;
+    --secondary: #0f172a;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --bg-light: #f8fafc;
+    --white: #ffffff;
+    --gradient-tech: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { 
+    margin: 0; padding: 0; box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+}
+
+body { 
+    font-family: 'Cairo', sans-serif; 
+    background: var(--bg-light); 
+    color: var(--text-main); 
+    line-height: 1.6; 
+    overflow-x: hidden; 
+    text-align: right; 
+}
+
+/* --- 2. نظام الأنيميشن (جديد) --- */
+/* الحالة الافتراضية للعناصر قبل الظهور */
+.reveal-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition);
+}
+
+/* حالة خاصة بلقطات الشاشة (انزلاق من الجانب) */
+.screen-item.reveal-hidden {
+    transform: translateX(50px);
+}
+
+/* الحالة عند الظهور (تُفعل بواسطة JS) */
+.revealed {
+    opacity: 1 !important;
+    transform: translate(0) !important;
+}
+
+/* --- 3. الهيدر والتنقل --- */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 5%; background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.logo { font-size: 28px; font-weight: 900; color: var(--secondary); text-decoration: none; }
+.logo span { color: var(--primary); }
+.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+.nav-links a { color: var(--text-main); font-weight: 700; text-decoration: none; font-size: 14px; transition: 0.3s; }
+.nav-links a:hover { color: var(--primary); }
+.btn-download-nav { background: var(--secondary); color: white !important; padding: 8px 20px; border-radius: 50px; }
+
+/* --- 4. قسم الـ Hero --- */
+.hero { padding: 120px 0 60px; background: radial-gradient(circle at top right, #e2e8f0, #f8fafc); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 40px; }
+.hero-text { flex: 1.2; }
+.hero-text h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.2; margin-bottom: 1.5rem; }
+.gradient-text { background: var(--gradient-tech); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.badge { background: #d1fae5; color: #065f46; padding: 8px 16px; border-radius: 50px; font-weight: 700; font-size: 13px; display: inline-block; margin-bottom: 1rem; }
+
+.hero-cta { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.btn-main { 
+    padding: 15px 45px; border-radius: 12px; font-weight: 700; text-decoration: none; 
+    background: var(--primary); color: white; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+    transition: var(--transition); border: none; cursor: pointer;
+}
+.btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4); }
+
+.contact-label { font-size: 14px; font-weight: 700; color: var(--text-muted); }
+.contact-icons { display: flex; gap: 15px; }
+.icon-link {
+    width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; 
+    justify-content: center; font-size: 22px; color: white; transition: var(--transition);
+    text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.whatsapp { background: #25D366; }
+.telegram { background: #0088cc; }
+.facebook { background: #1877F2; }
+.private-chat { background: var(--gradient-tech); }
+.icon-link:hover { transform: translateY(-5px) rotate(5deg); filter: brightness(1.1); }
+
+.hero-image { flex: 0.8; display: flex; justify-content: center; }
+.app-screen-main { width: 100%; max-width: 320px; border-radius: 40px; border: 10px solid var(--secondary); box-shadow: var(--shadow-xl); }
+
+/* --- 5. لقطات التطبيق (تحسين الأنيميشن) --- */
+.app-screenshots { padding: 80px 5%; background: var(--white); text-align: center; }
+.screens-container { 
+    display: flex; gap: 25px; overflow-x: auto; padding: 20px 0; 
+    justify-content: center; scrollbar-width: none; 
+}
+.screens-container::-webkit-scrollbar { display: none; }
+.screen-item { min-width: 220px; }
+.screen-item img { 
+    width: 100%; border-radius: 25px; box-shadow: var(--shadow-lg); 
+    border: 5px solid var(--secondary); margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+.screen-item:hover img { transform: scale(1.05); }
+.screen-item span { font-weight: 700; color: var(--secondary); }
+
+/* تأثير التتابع (Delay) للقطات الشاشة */
+.screen-item:nth-child(1) { transition-delay: 0.1s; }
+.screen-item:nth-child(2) { transition-delay: 0.2s; }
+.screen-item:nth-child(3) { transition-delay: 0.3s; }
+.screen-item:nth-child(4) { transition-delay: 0.4s; }
+
+/* --- 6. طرق السحب --- */
+.local-payments { padding: 80px 5%; text-align: center; background: #fdfdfd; }
+.payment-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 50px; }
+.pay-card { display: flex; flex-direction: column; align-items: center; width: 150px; }
+.pay-card .img-container {
+    width: 100px; height: 100px; background: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06); border: 4px solid #fff; transition: 0.3s;
+}
+.pay-card img { width: 100%; height: 100%; object-fit: cover; }
+.pay-card span { margin-top: 15px; font-weight: 800; font-size: 15px; color: var(--secondary); }
+.pay-card:hover .img-container { border-color: var(--primary); box-shadow: 0 12px 25px rgba(16, 185, 129, 0.2); }
+
+/* --- 7. الإحصائيات وقصص النجاح --- */
+.stats { display: flex; justify-content: space-around; padding: 60px 5%; background: var(--secondary); color: white; text-align: center; flex-wrap: wrap; gap: 30px; }
+.stat-item h3 { font-size: 2.8rem; color: var(--primary); margin-bottom: 5px; }
+
+.test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 40px auto; }
+.test-card { background: white; padding: 30px; border-radius: 20px; box-shadow: var(--shadow-lg); border-right: 6px solid var(--primary); }
+.profit-amount { direction: ltr; font-weight: 900; font-size: 1.6rem; color: var(--primary); margin: 10px 0; }
+
+/* --- 8. الفوتر والدعوة النهائية --- */
+.cta-box { background: var(--gradient-tech); padding: 60px 20px; border-radius: 30px; color: white; max-width: 900px; margin: 0 auto; text-align: center; }
+footer { padding: 40px; text-align: center; background: #f1f5f9; font-weight: 700; color: var(--text-muted); }
+
+/* --- تعديلات عامة لضمان التوافق --- */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* --- تحسين قسم الـ Hero للموبايل --- */
+.hero {
+    padding: 80px 0 40px; /* تقليل الحشو العلوي */
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: row; /* افتراضي للكمبيوتر */
+    align-items: center;
+    gap: 30px;
+}
+
+/* --- تحسين لقطات الشاشة للموبايل --- */
+.screens-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto; /* تفعيل التمرير الأفقي */
+    padding: 20px 5%;
+    scroll-snap-type: x mandatory; /* جعل التمرير يتوقف عند كل صورة */
+    justify-content: flex-start; /* مهم جداً للموبايل */
+}
+
+.screen-item {
+    min-width: 260px; /* حجم مناسب لعرض الهاتف */
+    scroll-snap-align: center;
+}
+
+/* --- 📱 استجابة الشاشات للهواتف (Media Queries) --- */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column; /* تحويل الترتيب ليكون عمودي */
+        text-align: center;
+    }
+
+    .hero-text {
+        order: 1; /* النص أولاً */
+    }
+
+    .hero-image {
+        order: 2; /* الصورة ثانياً */
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem; /* تصغير العنوان ليناسب الشاشة */
+    }
+
+    .hero-cta {
+        align-items: center; /* سنتر الأزرار */
+        width: 100%;
+    }
+
+    .agent-contacts {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 1rem 3%;
+    }
+    
+    .logo {
+        font-size: 22px;
+    }
+
+    .btn-download-nav {
+        padding: 6px 15px;
+        font-size: 12px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+
+    .payment-grid {
+        gap: 15px; /* تقليل المسافات بين بطاقات الدفع */
+    }
+
+    .pay-card {
+        width: 45%; /* عرض بطاقتين في الصف الواحد */
+    }
+
+    .stat-item {
+        width: 100%; /* الإحصائيات تأخذ عرضاً كاملاً */
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 768px) {
+    .scroll-hint { display: block !important; }
+}
+
+
+
+/* --- تعديلات ذكية لضمان التوافق مع كافة أحجام الشاشات --- */
+
+/* 1. إصلاح الحاوية الرئيسية لتكون مرنة */
+@media (max-width: 991px) {
+    .container {
+        flex-direction: column !important; /* تحويل الترتيب ليكون عمودي */
+        text-align: center !important;
+        padding-top: 20px;
+    }
+
+    .hero-text {
+        width: 100%;
+        order: 1; /* النص في الأعلى */
+    }
+
+    .hero-image {
+        width: 100%;
+        max-width: 280px; /* حجم مناسب لصورة الهاتف في الموبايل */
+        order: 2; /* الصورة أسفل النص */
+        margin-top: 30px;
+    }
+
+    .hero-cta {
+        align-items: center !important; /* توسيط الأزرار */
+    }
+}
+
+/* 2. إصلاح قسم لقطات الشاشة ومنع اختفائها */
+.screens-container {
+    display: flex !important;
+    overflow-x: auto !important; /* تفعيل التمرير الجانبي */
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 10px !important;
+    gap: 15px !important;
+    justify-content: flex-start !important; /* البدء من اليمين للموبايل */
+}
+
+.screen-item {
+    flex: 0 0 240px; /* تحديد عرض ثابت لكل لقطة لضمان عدم تقلصها */
+    min-width: 240px;
+}
+
+/* 3. إصلاح شبكة الدفع (Bankak, O-Cash) */
+@media (max-width: 600px) {
+    .payment-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* وضع عنصرين في الصف */
+        gap: 15px !important;
+    }
+    
+    .pay-card {
+        width: 100% !important;
+    }
+    
+    .pay-card .img-container {
+        width: 80px !important; /* تصغير الدوائر قليلاً للموبايل */
+        height: 80px !important;
+    }
+}
+
+/* 4. إصلاح قسم قصص النجاح */
+@media (max-width: 768px) {
+    .test-grid {
+        grid-template-columns: 1fr !important; /* كرت واحد في كل صف */
+        padding: 0 20px;
+    }
+    
+    .stat-item {
+        flex: 0 0 100% !important; /* الإحصائيات تحت بعضها */
+        margin-bottom: 20px;
+    }
+}
+
+/* 5. منع التمرير الأفقي المزعج للموقع ككل */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
