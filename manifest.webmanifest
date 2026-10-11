@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "GPay Sudan",
+  "short_name": "GPay Sudan",
+  "description": "GPay Sudan — digital tasks and local payment information",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7faf7",
+  "theme_color": "#087f5b",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

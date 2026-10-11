@@ -1,0 +1,5 @@
+const CACHE_NAME='gpay-sudan-v2';
+const CORE=['./','./index.html','./style.css','./script.js','./manifest.webmanifest','./icons/icon.svg','./images/1.jpg','./images/2.jpg','./images/3.jpg','./images/4.jpg','./images/1.webp','./images/2.webp','./images/3.webp'];
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));});
+self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE_NAME).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));});
+self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;event.respondWith(caches.match(req).then(cached=>cached||fetch(req).then(response=>{if(response&&response.status===200){const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(req,copy));}return response;}).catch(()=>caches.match('./index.html'))));});
